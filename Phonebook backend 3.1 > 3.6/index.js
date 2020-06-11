@@ -24,17 +24,18 @@ let persons = [
         id: 4,
     },
 ];
-
+//All
 app.get("/api/persons", (req, res) => {
     res.json(persons);
 });
-
+//Info
 app.get("/info", (req, res) => {
     const today = new Date();
     res.send(`<p>Phonebook has info for ${persons.length} persons.</p>
             <p>${today}</p>
                 `);
 });
+//by ID
 app.get("/api/persons/:id", (request, response) => {
     const id = Number(request.params.id);
     const person = persons.find((person) => person.id === id);
@@ -43,6 +44,13 @@ app.get("/api/persons/:id", (request, response) => {
     } else {
         response.status(404).end();
     }
+});
+//Delete
+app.delete("/api/persons/:id", (request, response) => {
+    const id = Number(request.params.id);
+    persons = persons.filter((person) => person.id !== id);
+
+    response.status(204).end();
 });
 
 const PORT = 3001;
