@@ -1,7 +1,12 @@
 const express = require("express");
+const morgan = require("morgan");
 const app = express();
 app.use(express.json());
-
+app.use(morgan("tiny"));
+app.use(morgan(":type"));
+morgan.token("type", function(req, res) {
+    return JSON.stringify(req.body);
+});
 let persons = [
     {
         name: "Arto Hellas",
