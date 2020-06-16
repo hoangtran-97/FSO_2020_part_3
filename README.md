@@ -1,5 +1,5 @@
 # Excercises for Part 3
-## Phonebook backend
+## Phonebook
  
 [Fullstack app](https://hoangtranxamk-fso-phonebook.herokuapp.com) - Deployed on Heroku.
 ### Api available at 
