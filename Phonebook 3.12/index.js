@@ -56,13 +56,13 @@ app.get("/info", (req, res) => {
 });
 //by ID
 app.get("/api/persons/:id", (request, response) => {
-    const id = Number(request.params.id);
-    const person = persons.find((person) => person.id === id);
-    if (person) {
-        response.json(person);
-    } else {
-        response.status(404).end();
-    }
+    Person.findById(request.params.id).then((person) => {
+        if (person) {
+            response.json(person);
+        } else {
+            response.status(404).end();
+        }
+    });
 });
 //Delete
 app.delete("/api/persons/:id", (request, response) => {
