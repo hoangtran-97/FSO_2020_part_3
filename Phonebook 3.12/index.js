@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
@@ -40,14 +41,18 @@ const generateId = () => {
 };
 //All
 app.get("/api/persons", (req, res) => {
-    res.json(persons);
+    Person.find({}).then((persons) => {
+        res.json(persons);
+    });
 });
 //Info
 app.get("/info", (req, res) => {
-    const today = new Date();
-    res.send(`<p>Phonebook has info for ${persons.length} persons.</p>
+    Person.find({}).then((persons) => {
+        const today = new Date();
+        res.send(`<p>Phonebook has info for ${persons.length} persons.</p>
             <p>${today}</p>
                 `);
+    });
 });
 //by ID
 app.get("/api/persons/:id", (request, response) => {
