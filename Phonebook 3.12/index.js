@@ -112,6 +112,20 @@ app.post("/api/persons", (request, response) => {
         response.json(savedPerson);
     });
 });
+//Put Mongo
+app.put("/api/persons/:id", (request, response, next) => {
+    const body = request.body;
+
+    const person = {
+        number: body.number,
+    };
+
+    Person.findByIdAndUpdate(request.params.id, person, {new: true})
+        .then((updatedPerson) => {
+            response.json(updatedPerson);
+        })
+        .catch((error) => next(error));
+});
 const errorHandler = (error, request, response, next) => {
     console.error(error.message);
 
