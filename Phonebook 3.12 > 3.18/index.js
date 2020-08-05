@@ -116,9 +116,8 @@ app.post("/api/persons", (request, response, next) => {
             response.json(savedPerson);
         })
         .catch((error) => {
+            response.json(error.message);
             next(error);
-            response.json(error);
-            console.log("ERROR", JSON.stringify(error));
         });
 });
 //Put Mongo
