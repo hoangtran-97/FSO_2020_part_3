@@ -82,16 +82,21 @@ const App = () => {
                 name: newName,
                 number: newNumber,
             };
-            personService.create(newPerson).then((response) => {
-                setPersons(persons.concat(response));
-                setNewName("");
-                setNewNumber("");
-                setIsError(false);
-                setErrorMessage(`Person '${response.name}' was added`);
-                setTimeout(() => {
-                    setErrorMessage(null);
-                }, 5000);
-            });
+            personService
+                .create(newPerson)
+                .then((response) => {
+                    setPersons(persons.concat(response));
+                    setNewName("");
+                    setNewNumber("");
+                    setIsError(false);
+                    setErrorMessage(`Person '${response.name}' was added`);
+                    setTimeout(() => {
+                        setErrorMessage(null);
+                    }, 5000);
+                })
+                .catch((error) => {
+                    console.log(error.response.data);
+                });
         }
     };
 

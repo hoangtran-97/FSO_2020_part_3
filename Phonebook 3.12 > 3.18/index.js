@@ -116,7 +116,6 @@ app.post("/api/persons", (request, response, next) => {
             response.json(savedPerson);
         })
         .catch((error) => {
-            response.json(error.message);
             next(error);
         });
 });
