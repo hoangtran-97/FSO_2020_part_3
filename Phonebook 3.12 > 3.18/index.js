@@ -3,6 +3,8 @@ const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
 const mongoose = require("mongoose");
+mongoose.set("useCreateIndex", true);
+mongoose.set("useFindAndModify", false);
 const app = express();
 const PORT = process.env.PORT || 3001;
 const Person = require("./models/person");
