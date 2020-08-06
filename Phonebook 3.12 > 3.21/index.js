@@ -13,31 +13,10 @@ app.use(express.json());
 app.use(morgan("tiny"));
 app.use(morgan(":type"));
 app.use(express.static("build"));
-morgan.token("type", function(req, res) {
+morgan.token("type", function(req) {
     return JSON.stringify(req.body);
 });
-let persons = [
-    {
-        name: "Arto Hellas",
-        number: "1234",
-        id: 1,
-    },
-    {
-        name: "Ada Lovelace",
-        number: "39-44-5323523",
-        id: 2,
-    },
-    {
-        name: "Dan Abramov",
-        number: "12-43-234345",
-        id: 3,
-    },
-    {
-        name: "Mary Poppendieck",
-        number: "39-23-6423122",
-        id: 4,
-    },
-];
+
 const generateId = () => {
     return Math.floor(Math.random() * Math.floor(200));
 };
@@ -69,7 +48,7 @@ app.get("/api/persons/:id", (request, response) => {
 //Delete
 app.delete("/api/persons/:id", (request, response, next) => {
     Person.findByIdAndRemove(request.params.id)
-        .then((result) => {
+        .then(() => {
             response.status(204).end();
         })
         .catch((error) => next(error));
